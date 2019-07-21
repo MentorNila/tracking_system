@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
-
     public function register(Request $request)
     {
         $v = Validator::make($request->all(), [
@@ -26,7 +25,6 @@ class AuthController extends Controller
         $user->save();
         return response()->json(['status' => 'success'], 200);
     }
-
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -35,7 +33,6 @@ class AuthController extends Controller
         }
         return response()->json(['error' => 'login_error'], 401);
     }
-
     public function logout()
     {
         $this->guard()->logout();
@@ -44,7 +41,6 @@ class AuthController extends Controller
             'msg' => 'Logged out Successfully.'
         ], 200);
     }
-
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);
@@ -53,7 +49,6 @@ class AuthController extends Controller
             'data' => $user
         ]);
     }
-
     public function refresh()
     {
         if ($token = $this->guard()->refresh()) {
@@ -63,7 +58,6 @@ class AuthController extends Controller
         }
         return response()->json(['error' => 'refresh_token_error'], 401);
     }
-    
     private function guard()
     {
         return Auth::guard();

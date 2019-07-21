@@ -33,4 +33,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function tracking_code()
+    {
+        return $this->hasOne('App\TrackingCode');
+    }
 }

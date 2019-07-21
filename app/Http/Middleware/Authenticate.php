@@ -4,7 +4,6 @@ use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 class Authenticate extends Middleware
 {
-    
     public function handle($request, Closure $next, ...$guards)
     {
         if ($this->authenticate($request, $guards) === 'authentication_error') {
@@ -12,7 +11,6 @@ class Authenticate extends Middleware
         }
         return $next($request);
     }
-
     protected function authenticate($request, array $guards)
     {
         if (empty($guards)) {
